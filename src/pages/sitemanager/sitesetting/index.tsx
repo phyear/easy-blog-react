@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
 import { Form, Input,Button} from 'antd';
-import Avatar from '../../../components/avatar'
+import Avatar from '../../../components/avatar';
+import {querySetting} from '../../../utils/api'
+
 const {TextArea } = Input;
 class SiteSetting extends Component {
+    state = {
+        siteSetting:{}
+    }
     updateImage = () => {
 
     }
+    
+    componentDidMount(){
+        const that = this;
+        querySetting().then((res) => {
+            that.setState({
+                siteSetting: res,
+            })
+        })
+    }
+
     render() {
-       
+        const initDate = this.state.siteSetting;
+        console.log(initDate);
         return (
             <div>
-              <Form name="basic" >
+              <Form name="basic"  initialValues = {initDate}>
                     <Form.Item  name="imgUrl">
                         <Avatar imgUrl = {'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'} updateImg = {this.updateImage}/>
                     </Form.Item>
