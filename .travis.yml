@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-  - "8"
+  - "14"
 install: npm install
 script:
   - npm run build
-  - docker build -t easy-blog-react .   // `imagename`是变量，镜像的名字，你随便写个。特别注意，后面那个点是必须要的，不要写掉了！
+  - docker build -t easy-blog-react .  
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
   - docker push easy-blog-react
