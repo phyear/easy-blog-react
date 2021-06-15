@@ -4,6 +4,6 @@ node_js:
 install: npm install
 script:
   - npm run build
-  - docker build -t easy-blog-react .  
+  - docker build -t codereporter/easy-blog-react:latest .  
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-  - docker push easy-blog-react
+  - docker push codereporter/easy-blog-react:latest
