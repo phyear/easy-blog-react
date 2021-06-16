@@ -12,6 +12,10 @@ const ArticleList = lazy( () => import("./article/articlelist"))
 
 const SiteManagerPage = lazy( () => import("./sitemanager"))
 
+const FrontLayout = lazy( () => import("./frontlayout"))
+
+const ArticleView = lazy( () => import("./frontlayout/article"))
+
 export {
-    ManagerLayout,UserSetting,Home,ArticlePage,ArticleList,SiteManagerPage
+    ManagerLayout,UserSetting,Home,ArticlePage,ArticleList,SiteManagerPage,FrontLayout,ArticleView
 }

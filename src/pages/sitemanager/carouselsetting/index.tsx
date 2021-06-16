@@ -1,52 +1,42 @@
 import React, { Component } from 'react';
 import {Card, Row, Col} from 'antd';
 import CarouselOperate from '../../../components/carousloperate'
-import { SettingOutlined,EditOutlined,EllipsisOutlined} from '@ant-design/icons';
+import { DeleteTwoTone,EditOutlined,EllipsisOutlined, PlusOutlined} from '@ant-design/icons';
+import {listCarouseSetting,deleteCarouseSetting} from '../../../utils/api';
+import {handlerUrl} from '../../../utils/urlutil';
 
 class CarouselSetiing extends Component {
     state = {
-        data:[
-            {
-             id:1,
-             titile:'Carousel走马灯',
-             imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-          },
-          {
-            id:2,
-            titile:'Carousel走马灯',
-            imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-         }, {
-            id:3,
-            titile:'Carousel走马灯',
-            imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-         }, {
-            id:4,
-            titile:'Carousel走马灯',
-            imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-         }, {
-            id:5,
-            titile:'Carousel走马灯',
-            imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-         }, {
-            id:6,
-            titile:'Carousel走马灯',
-            imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-         },{
-            id:7,
-            titile:'Carousel走马灯',
-            imgUrl:'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-         }
-        ],
+        data:[],
         visible:false,
-        id:1
+        id:null
     }
 
     updateInfo = (id:number) => {
-         this.setState({visible: !this.state.visible})
+         this.setState({visible: !this.state.visible, id:id})
+    }
+
+    delete = (id:number,index:number) => {
+        const _this = this;
+        deleteCarouseSetting(id).then(res => {
+            let list = this.state.data
+            list.splice(index, 1)
+            _this.setState({
+                data: list
+            })
+        })
     }
 
     closeUpdateOperate = () => {
         this.setState({visible: !this.state.visible, id:null });
+    }
+
+    componentDidMount(){
+        listCarouseSetting({}).then(res => {
+            this.setState({
+                data:res
+            })
+        })
     }
          
     render() {
@@ -54,26 +44,37 @@ class CarouselSetiing extends Component {
         const datas = this.state.data;
         return (
             <div>
-                <CarouselOperate visible = {this.state.visible} id={this.state.id} closeUpdateOperate = {this.closeUpdateOperate} />
-                <Row gutter={16}>
                 {
-                 datas.map(data => (
-                   <Col xs = {{span: 24}} md ={{span: 4 }} key = {data.id}>
+                  this.state.visible ? 
+                  <CarouselOperate visible = {this.state.visible} id={this.state.id} closeUpdateOperate = {this.closeUpdateOperate} />
+                : <div></div>
+                }
+                <Row gutter={16}>
+                  <Col xs = {{span: 24}} md ={{span: 6 }} key = {'start'}>
+                    <Card>
+                       <div style = {{textAlign:'center', fontSize:'40px'}}>
+                        <PlusOutlined onClick = { () => this.updateInfo(null)} />
+                       </div>
+                    </Card>
+                  </Col>  
+                {
+                 datas.map((data,index) => (
+                   <Col xs = {{span: 24}} md ={{span: 6 }} key = {data.id}>
                         <Card
                         cover={
-                        <img
+                        <img 
+                            style = {{maxHeight:'200px'}}
                             alt="example"
-                            src={data.imgUrl}
+                            src={handlerUrl('http://localhost:9000',data.url)}
                         />
                         }
                         actions={[
-                            <SettingOutlined key="setting" onClick = { () => this.updateInfo(data.id)} />,
-                            <EditOutlined key="edit" />,
-                            <EllipsisOutlined key="ellipsis" />,
+                            <EditOutlined key="setting" onClick = { () => this.updateInfo(data.id)} />,
+                            <DeleteTwoTone key="delete" onClick = { () => this.delete(data.id,index)} />,
                             ]}
                         >
                         <Meta
-                        title={data.titile}
+                        title={data.title}
                         />
                     </Card>
                    </Col>

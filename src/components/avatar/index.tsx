@@ -7,21 +7,21 @@ import './index.css'
 const defaultProps = {
    isDomain: false,
    isCircle: true,
-   width:'104px' 
+   width:'104px',
 };
 
  type avatarProps = {
-     imgUrl:string,
+     imgUrl?:string,
      domain?:string,
      updateImg: any,
-     
+     value?:any,
+     action?:string 
  } & Partial<typeof defaultProps>;
 
 class Avatar extends React.Component<avatarProps> {
   static defaultProps = defaultProps;
   state = {
     loading: false,
-    url: ''
   };
 
   beforeUpload = (file:any) => {
@@ -43,19 +43,27 @@ class Avatar extends React.Component<avatarProps> {
     }
     if (info.file.status === 'error') {
         this.setState({ loading: false });
-        this.setState({ url: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' });
-        this.props.updateImg('https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png');
+    } else {
+      var {isDomain, domain} = this.props;
+        this.setState({ loading: false });
+        const img = info.file.response;
+        this.props.updateImg(img)
+        this.setState({
+          url : img == null ? img : (isDomain ? domain + img : img)
+        })
     }
   };
   
-  componentDidMount() {
-    const {imgUrl, isDomain, domain } = this.props;
-    const url = imgUrl ? imgUrl : (isDomain ? domain + imgUrl : imgUrl);
-    this.setState({ url: url });
+  pingUrl = () => {
+    var {imgUrl, isDomain, domain, value} = this.props;
+    if(value != null){
+       imgUrl = value;
+    }
+    return imgUrl == null ? imgUrl : (isDomain ? domain + imgUrl : imgUrl);
   }
-
   render() {
-    const { loading, url} = this.state;
+    const { loading} = this.state;
+    const url = this.pingUrl();
     const uploadButton = (
       <div>
         {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -63,7 +71,6 @@ class Avatar extends React.Component<avatarProps> {
     );
     const imageStyle = {width:this.props.width, height:this.props.width, borderRadius: this.props.isCircle ? '50%' : '0%', border: '1px dashed #d9d9d9', display: 'flex', overflow:'hidden'}
     const imgStyle = {width: this.props.width,height:this.props.width, borderRadius: this.props.isCircle ? '50%  ' : '0%'}
-    console.log(imageStyle)
     return (
       <div style = {imageStyle}>
         <Upload
@@ -71,7 +78,7 @@ class Avatar extends React.Component<avatarProps> {
         listType="picture-card"
         className="avatar-uploader"
         showUploadList={false}
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        action={this.props.action}
         beforeUpload={this.beforeUpload}
         onChange={this.handleChange}
       >

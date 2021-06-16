@@ -36,8 +36,8 @@ class SiderBar extends React.Component{
                 <Menu.Item icon={<HomeOutlined/>} key="/home"><Link to="/manager/home">首页</Link></Menu.Item>
                 <Menu.Item icon={<UserOutlined/>} key="/userSetting"><Link to="/manager/userSetting">个人设置</Link></Menu.Item>
                 <SubMenu key="/article" icon={<InsertRowBelowOutlined />} title = {'文章管理'}>
-                 <Menu.Item icon={<InsertRowBelowOutlined />}  key="/article/operate"><Link to="/manager/article/operate">文章列表</Link></Menu.Item>
-                 <Menu.Item icon={<InsertRowBelowOutlined />}  key="/article/update"><Link to="/manager/article">创作文章</Link></Menu.Item>
+                 <Menu.Item icon={<InsertRowBelowOutlined />}  key="/article/operate"><Link to = {{pathname:"/manager/article/operate"}}>文章列表</Link></Menu.Item>
+                 <Menu.Item icon={<InsertRowBelowOutlined />}  key="/article/update"><Link to={{pathname:"/manager/article", state:{id:null}}}>创作文章</Link></Menu.Item>
                 </SubMenu>
                 
                 <Menu.Item icon={<SettingOutlined/>}><Link to="/manager/site">站点管理</Link></Menu.Item>
