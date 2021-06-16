@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Card, Row, Col} from 'antd';
 import CarouselOperate from '../../../components/carousloperate'
-import { DeleteTwoTone,EditOutlined,EllipsisOutlined, PlusOutlined} from '@ant-design/icons';
+import { DeleteTwoTone,EditOutlined, PlusOutlined} from '@ant-design/icons';
 import {listCarouseSetting,deleteCarouseSetting} from '../../../utils/api';
 import {handlerUrl} from '../../../utils/urlutil';
 
