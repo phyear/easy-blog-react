@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 axios.defaults.timeout = 100000;
-axios.defaults.baseURL = "/api/es";
 
 export function get(url, params){    
     return new Promise((resolve, reject) =>{        

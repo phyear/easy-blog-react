@@ -10,7 +10,7 @@ import {UserSetting,Home, ArticlePage, ArticleList,SiteManagerPage} from '../../
 const ManagerLayout:React.FC = () => (
     <Row>
          <Col xs = {24} md = {24}>
-            <NavBar/>
+            <NavBar isManager = {true}/>
         </Col>
         <Col md ={24} style= {{marginTop:'64px'}}>
             <Row>

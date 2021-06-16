@@ -1,5 +1,5 @@
 import React from 'react'
-import {ManagerLayout} from '../pages'
+import {ManagerLayout,FrontLayout} from '../pages'
 
 export type RouterType = {
     key: string,
@@ -17,10 +17,18 @@ const ManagerLayoutRouter:RouterType = {
     root:[]
 }
 
+const FrontLayoutRouter:RouterType = {
+    path:'/',
+    key:'base',
+    component:FrontLayout,
+    root:[]
+}
+
 
 
 const Routers:RouterType[] = ([
     ManagerLayoutRouter,
+    FrontLayoutRouter
 ])
 
 export {
