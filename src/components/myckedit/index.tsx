@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {DOMAIN, ACTION} from '../../constant'
+import {MINIO_DOMAIN, ACTION} from '../../constant'
 import {handlerUrl } from '../../utils/urlutil'
 
 class UploadAdapter {
@@ -12,7 +12,7 @@ class UploadAdapter {
         // CKEditor 5's FileLoader instance.
       this.loader = props;
       // URL where to send files.
-      this.domian = DOMAIN;
+      this.domian = MINIO_DOMAIN;
       this.action = ACTION;
     }
     upload() {

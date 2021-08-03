@@ -24,6 +24,7 @@ class ArticlePage extends Component<RouteComponentProps<{},{},locationState>> {
             message.success("保存失败")
         })
     }
+    
 
     componentDidMount(){
         const {id} = this.props.location.state;

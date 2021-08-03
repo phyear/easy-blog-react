@@ -4,6 +4,7 @@ import Avatar from '../../components/avatar'
 import './index.css'
 import {queryCarouseSettingById, updateCarouseSetting} from '../../utils/api';
 import { FormInstance } from 'antd/lib/form';
+import {MINIO_DOMAIN} from '../../constant'
 
 interface  CarouselOperateProp{
     visible: boolean;
@@ -70,7 +71,7 @@ class CarouselOperate extends Component<CarouselOperateProp> {
                                 updateImg = {this.updateImage}
                                 isCircle = {false}
                                 isDomain = {true}
-                                domain = {'http://localhost:9000'}
+                                domain = {MINIO_DOMAIN}
                                 width= {'200px'}
                                 />
                         </Form.Item>

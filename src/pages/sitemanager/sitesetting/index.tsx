@@ -3,6 +3,9 @@ import { Form, Input,Button, message} from 'antd';
 import Avatar from '../../../components/avatar';
 import {querySetting, updateSetting} from '../../../utils/api';
 import { FormInstance } from 'antd/lib/form';
+import {MINIO_DOMAIN} from '../../../constant'
+
+
 const {TextArea } = Input;
 class SiteSetting extends Component {
     formRef = React.createRef<FormInstance>();
@@ -41,7 +44,7 @@ class SiteSetting extends Component {
                          action = {'/api/v1/upload'}
                          updateImg = {this.updateImage}
                          isDomain = {true}
-                         domain = {'http://localhost:9000'}
+                         domain = {MINIO_DOMAIN}
                          />
                     </Form.Item>
                     <Form.Item label="编号" name="id" style = {{display:'none'}}>
