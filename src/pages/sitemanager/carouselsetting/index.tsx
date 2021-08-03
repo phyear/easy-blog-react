@@ -4,6 +4,7 @@ import CarouselOperate from '../../../components/carousloperate'
 import { DeleteTwoTone,EditOutlined, PlusOutlined} from '@ant-design/icons';
 import {listCarouseSetting,deleteCarouseSetting} from '../../../utils/api';
 import {handlerUrl} from '../../../utils/urlutil';
+import {MINIO_DOMAIN} from '../../../constant'
 
 class CarouselSetiing extends Component {
     state = {
@@ -65,7 +66,7 @@ class CarouselSetiing extends Component {
                         <img 
                             style = {{maxHeight:'200px'}}
                             alt="example"
-                            src={handlerUrl('http://localhost:9000',data.url)}
+                            src={handlerUrl(MINIO_DOMAIN,data.url)}
                         />
                         }
                         actions={[

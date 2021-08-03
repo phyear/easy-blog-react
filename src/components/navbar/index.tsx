@@ -7,6 +7,9 @@ import {LogoutOutlined,BellOutlined} from '@ant-design/icons'
 import {querySetting} from '../../utils/api'
 import {handlerUrl} from '../../utils/urlutil'
 import {get} from '../../utils/storageUtil'
+import {MINIO_DOMAIN} from '../../constant'
+
+
 type navbarProps = {
     isManager: boolean
 }
@@ -54,7 +57,7 @@ class NavBar extends React.Component<navbarProps>{
                 </Menu>
                )
           
-          const  logo = handlerUrl("http://localhost:9000",this.state.logo);
+          const  logo = handlerUrl(MINIO_DOMAIN,this.state.logo);
           const isManager = this.props.isManager;
         return (
             <div style={{position:'fixed',top:'0px',width:'100%',background:'#fff',borderBottom: '1px solid #eee',zIndex:11,boxShadow:'0 2px 4px 0 rgb(15 19 88 / 12%)'}}>
